@@ -18,10 +18,7 @@ x = linspace(0,1,n);
 % v = u - x(1-x)
 v = meshgrid(x.*(1-x));
 tic
-U = LUsolve(AA,f);
-toc
-tic
-U = GaussElim(AA,f);
+U = PGCsolve(AA,f);
 toc
 U = reshape(U,10,10);
 U = U + v;
