@@ -1,6 +1,7 @@
 clc,clear;
-% n =
+% 网格密度n
 n = 10;
+% 构造线性方程组与辅助变量的赋值
 A = diag(4*ones(1,n))+diag(-ones(1,n-1),-1)+diag(-ones(1,n-1),1);
 I = -eye(n);
 AA = zeros(n*n);
@@ -14,10 +15,14 @@ end
 h = 1/(n-1);
 f = (3-2)*h^2*ones(n*n,1);
 x = linspace(0,1,n);
+% v = u - x(1-x)
 v = meshgrid(x.*(1-x));
-% 路子错了，虽然可以用直接法解线性方程组来求解这个问题，但不能带有边界条件
-% 之后将改用迭代法求解此问题
+tic
 U = LUsolve(AA,f);
+toc
+tic
+U = GaussElim(AA,f);
+toc
 U = reshape(U,10,10);
 U = U + v;
 surf(U);
