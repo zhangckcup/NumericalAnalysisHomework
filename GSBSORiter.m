@@ -8,6 +8,7 @@ function u = GSBSORiter(n,w)
     u(:,1) = i.*(1-i);u(:,n+2) = u(:,1);
     e = 0.000000001;
     A = diag(4*ones(1,n))+diag(-ones(1,n-1),-1)+diag(-ones(1,n-1),1);
+    tic
     for k=1:2000
         er = 0;
         for i = 2:n+1
@@ -21,5 +22,6 @@ function u = GSBSORiter(n,w)
             break
         end
     end
+    toc
     fprintf("µü´ú½áÊø,k=%d,e_max=%0.12f\n",k,er);
 end
